@@ -25,7 +25,7 @@
  
 
  /* font sizes */
-  --fs-900: 3.5rem;   /* 56px */
+  --fs-900: clamp(2rem, calc(2rem + (24 * ((100vw - 375px) / (768 - 375)))), 3.5rem);
   --fs-400: 1.125rem; /* 18px */
   --fs-300: 1rem;     /* 16px */
 
@@ -42,13 +42,13 @@
   --space-32: 2rem;
   --space-24: 1.5rem;
   --space-16: 1rem;
-  --space-32: .5rem;
+  --space-8: .5rem;
 
 
   /* ---------- RADIUS / SHADOWS ---------- */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-lg: 16px;
 
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -123,7 +123,7 @@ a {
 /* =========================================
    Text Presets
    ========================================= */
-.text-preset {
+.tp {
   font-family: var(--font-sans);
   font-weight: var(--tp-weight);
   font-size: var(--tp-size);
@@ -131,6 +131,129 @@ a {
   letter-spacing: var(--tp-ls, var(--ls-0));
 }
 
-.text-preset-1 { --tp-weight: 700; --tp-size: var(--fs-900); --tp-lh: var(--lh-900); }
-.text-preset-2 { --tp-weight: 600; --tp-size: var(--fs-400); --tp-lh: var(--lh-400); }
-.text-preset-3 { --tp-weight: 400; --tp-size: var(--fs-300); --tp-lh: var(--lh-300); }
+.tp-1 { --tp-weight: 700; --tp-size: var(--fs-900); --tp-lh: var(--lh-900); }
+.tp-2 { --tp-weight: 600; --tp-size: var(--fs-400); --tp-lh: var(--lh-400); }
+.tp-3 { --tp-weight: 400; --tp-size: var(--fs-300); --tp-lh: var(--lh-300); }
+
+
+/* =========================================
+   Page style
+========================================= */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--purple-100);
+    background-image: url(./assets/images/background-pattern-mobile.svg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+
+    padding-inline: var(--space-24);
+    width: 100%;
+}
+
+   
+/* =========================================
+    Card Style
+========================================= */
+ .faq-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    min-height: 200px;
+    max-width: 600px;
+    width: 100%;
+    padding: clamp(var(--space-24), 5vw, var(--space-40));
+    padding-bottom: clamp(.5rem, 5vw, var(--space-24));
+    border-radius: clamp(var(--radius-md), 5vw, var(--radius-lg));
+ }
+
+.spacer {
+  height: 1px;
+  width: 100%;
+  background-color: var(--purple-100);
+  margin-block: .5rem;
+}
+
+ .faq-card header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-24);
+    color: var(--purple-950);
+ }
+
+ .icon-star {
+    background-image: url(./assets/images/icon-star.svg);
+    height: clamp(var(--space-24), 5vw, var(--space-40));
+    width: clamp(var(--space-24), 5vw, var(--space-40));
+    background-repeat: no-repeat;
+    background-size: contain;
+ }
+summary {
+  color: var(--purple-950);
+ }
+
+.faq-item:first-of-type {
+  margin-top: clamp(.5rem, 5vw, var(--space-16));;
+}
+
+ .faq-item__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding-block: var(--space-16);
+
+  cursor: pointer;
+  list-style: none; /* Firefox marker */
+}
+
+/* Chrome/Safari marker entfernen */
+.faq-item__summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__summary::after {
+  content: "";
+  width: 1.875rem;
+  height: 1.875rem;
+  flex: 0 0 1.875rem;
+
+  background-image: url("./assets/images/icon-plus.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Wenn offen: Minus */
+.faq-item[open] > .faq-item__summary::after {
+  background-image: url("./assets/images/icon-minus.svg");
+}
+
+.faq-item__summary:hover {
+  color: var(--violet-600);
+}
+
+.faq-item__summary:focus-visible {
+  outline: 2px solid var(--violet-600);
+  outline-offset: 6px;
+  border-radius: var(--radius-sm);
+}
+
+
+.faq-item__answer {
+  margin-top: var(--space-24);
+  color: var(--purple-600);
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url(./assets/images/background-pattern-desktop.svg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+  }
+}
